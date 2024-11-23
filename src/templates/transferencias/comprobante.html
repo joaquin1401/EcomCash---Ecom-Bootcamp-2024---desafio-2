@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block COMPROBANTE %}
+
+<div class="">
+    <div class="card" style="width: 30rem;">
+{% comment %} card-HEADER {% endcomment %}
+        <div class="card-header text-center">
+            
+            <h3>COMPROBANTE DE TRANSFERENCIA</h3>
+            
+        </div>
+{% comment %} card-BODY {% endcomment %}
+
+        <div class="card-body">
+            <h5>Nro. transferencia: {{object.id}}</h5>
+            <h5>Usuario origen: {{object.origen}}</h5> 
+            <h5>Usuario destino: {{object.destino}}</h5>
+            
+            <h5>Motivo: {{object.motivo}}</h5>
+            <h5>Fecha y hora: {{object.fecha}}</h5>
+            <h3>Monto: $ {{object.monto}}</h3>
+        </div>
+{% comment %} card-FOOTER {% endcomment %}
+        <div class="card-footer text-body-secondary">
+            <div class="container text-center">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+       
+{% endblock %}

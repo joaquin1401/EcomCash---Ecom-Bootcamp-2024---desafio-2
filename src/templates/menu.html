@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content_gral_admin %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background: #F2F2F2;">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="#"><img src="https://ecom.com.ar/img/Logo-Ecom.svg" alt="Logo" width="80" height="20"></a>
+        <a class="nav-link" href="#">EcomCash > admin > {{user.first_name}} {{user.last_name}} </b></a>
+
+        <a class="nav-link" href="{% url 'usuarios:listado' %}">Usuarios</a>
+
+        <a class="nav-link"href="{% url 'transferencias:motivos' %}">Motivos</a>
+        
+        <form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <button class="nav-link" type="submit">Cerrar sesion</button>
+        </form>       
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+{% block contenido %} {% endblock contenido %}  
+</div>    
+{% endblock %}
+
+

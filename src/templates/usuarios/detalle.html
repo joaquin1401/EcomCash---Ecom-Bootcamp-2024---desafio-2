@@ -1,0 +1,24 @@
+{% extends 'menu.html' %} {% block contenido %}
+
+  <h1> {{usuario.nombre}} </h1>
+  <p> NOMBRE {{usuario.first_name}}
+  </p> <p>
+    Cantidad dosis requerida: {{vacuna.cantidad_dosis}}    
+</p>
+<h2> transferenciaSSS </h2>
+<ul>
+    {% for transferencia in transferencias %}
+        <li>transferencia  {{transferencia}} </li>
+        <li>ORIGEN  {{transferencia.origen}} </li>
+        <li>DESTINO  {{transferencia.destino}} </li>
+        <li>MONTO  {{transferencia.monto}} </li>
+        <li>FECHA  {{transferencia.fecha}} </li>
+    {% empty %}
+    <li>NO HAYtransferencias </li>
+
+    
+    {% endfor %}
+</ul>
+
+       
+{% endblock %}

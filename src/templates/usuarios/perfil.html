@@ -1,0 +1,127 @@
+{% extends 'menu.html' %} {% block contenido %}
+
+
+<div class="row">
+    <div class="col-2">
+        <img src="{{ user.foto_perfil.url }}" alt="Foto de perfil" class="" style="width: 200px; height: 200px; object-fit: cover;">
+    </div>
+    <div class="col-3">
+        <h5> Usuario: {{usuario.username}} </h5>
+        <h5> CVU: {{usuario.cvu}} </h5>
+        <h5> Nombre: {{usuario.first_name}} </h5>
+        <h5> Apellido: {{usuario.last_name}} </h5>
+        <h5> DNI: {{usuario.dni}} </h5>
+        <h5> CUIL: {{usuario.cuil}} </h5>
+    </div>
+    <div class="col-3 text-center">
+        <div class="m-3">
+            <h5> SALDO </h5>
+            <h5> {{usuario.saldo}} </h5>
+        </div>
+        <div class="m-3">
+
+            {% if usuario.is_active %}
+                <h5> USUARIO ACTIVO </h5>
+            {% else %}
+                <h5>  USUARIO INACTIVO </h5>
+            {% endif %}
+            <a class="nav-link"href="{% url 'usuarios:cambiar_estado' usuario.cvu %}">Cambiar estado</a>
+        </div>
+    </div>
+    <div class="col-3 text-center mx-auto p-2">
+        <div class="m-3">
+            <a href="{% url 'usuarios:ingresar_dinero' usuario.cvu %}" type="button" class="btn btn-outline-success"><h5> INGRESAR DINERO </h5></a>
+        </div>
+        <div class="m-3">
+            <a href="{% url 'usuarios:retirar_dinero' usuario.cvu %}" type="button" class="btn btn-outline-success"><h5> RETIRAR DINERO </h5></a>
+
+            
+        </div>
+    </div>
+</div>
+{% comment %} LISTADOOO {% endcomment %}
+{% if transferencias %}
+<table class="table table-striped">
+    <thead>
+            <tr>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Origen</th>
+                <th scope="col">Destino</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Monto</th>
+            </tr>
+    </thead>
+    <tbody>
+        {% for transferencia in transferencias %}
+            <tr>
+                {% if transferencia.destino.is_admin %}
+                        <td>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-up m-1" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1z"/>
+                                <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708z"/>
+                            </svg>
+                            Retiro dinero
+                        </td>
+                {% else %}
+                        {% if transferencia.origen.is_admin %}
+                                <td>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-down m-1" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1z"/>
+                                        <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                                    </svg> 
+                                    Ingreso dinero
+                                </td>
+                        {% else %}
+                                    {% if transferencia.destino == usuario %}
+                                                    <td>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-left m-1" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
+                                                            <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                                                        </svg> 
+                                                        Recibio dinero
+                                                    </td>
+                                    {% else %}
+                                                    <td> 
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right m-1" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                                                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                                                        </svg>
+                                                        Envio dinero
+                                                    </td>
+                                    {% endif %}
+                        {% endif %}
+                {% endif %}
+                
+                <td>  {{transferencia.origen}} </td>
+                <td>  {{transferencia.destino}} </td>
+                <td>  {{transferencia.fecha}} </td>
+                <td>  {{transferencia.monto}} </td>
+                <td><a class="nav-link" href="{% url 'transferencias:comprobante' transferencia.id %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                      <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                      <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                    </svg>
+                  </a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+          
+    </table>
+{% else %}
+No tiene movimientos...
+{% endif %}
+
+
+
+
+
+
+
+
+
+<ul>
+    
+</ul>
+
+       
+{% endblock %}

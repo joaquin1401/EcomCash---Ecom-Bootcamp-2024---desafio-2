@@ -1,0 +1,13 @@
+{% extends 'menu.html' %} {% block contenido %}
+
+
+<form method="post" class="container" novalidate>{% csrf_token %}
+    
+    {{form.is_active.value}}
+    {{form.is_active}}
+    ¿Estas seguro que quieres eliminar "{{ usuario.is_active }}" de los motivos?
+    <button class="btn btn-outline-secondary" type="submit">Cambiar</button>
+    <a class="btn btn-outline-secondary" href="{% url 'usuarios:perfil' usuario.cvu %}">Cancelar</a>
+</form>
+
+{% endblock %}

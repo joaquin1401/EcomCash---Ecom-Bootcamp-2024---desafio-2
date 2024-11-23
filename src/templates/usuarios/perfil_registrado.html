@@ -1,0 +1,102 @@
+{% extends 'base.html' %} {% block content_gral %}
+
+<div class="">
+    <div class="card" style="width: 30rem;">
+{% comment %} card-HEADER {% endcomment %}
+        <div class="card-header">
+            <a class="col nav-link"href="{% url 'usuarios:inicio' user.cvu %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>                
+            </a>
+            
+        </div>
+{% comment %} card-BODY {% endcomment %}
+
+        <div class="card-body position-relative">
+            <img src="{{ user.foto_perfil.url }}" alt="Foto de perfil" class="position-absolute top-0 start-50 translate-middle" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p>CVU: {{user.cvu}}</p>
+            <p>Usuario: {{user}}</p>
+            <p>Email: {{user.email}}</p>
+            <p>Nombre: {{user.first_name}}</p>
+            <p>Apellido: {{user.last_name}}</p>
+            <a class=""href="{% url 'usuarios:editar' user.cvu %}">
+                Editar Perfil
+            </a>
+
+        </div>
+{% comment %} card-FOOTER {% endcomment %}
+        <div class="card-footer text-body-secondary">
+            <!-- Modal button CERRAR SESION -->
+            <a type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Cerrar sesión
+            </a>
+            <!-- Modal CERRAR SESION -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">¿Estas seguro que quieres cerrar sesion?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-primary" type="submit">Cerrar sesion</button>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+                    <!-- Botón para abrir el modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModal">
+                        Abrir Modal
+                    </button>
+  
+                <!-- Estructura del Modal -->
+                <div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="miModalLabel">Título del Modal</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body">
+                        <!-- Contenido del modal -->
+                        <form>
+                            <div class="mb-3">
+                            <label for="opcion" class="form-label">Selecciona una opción:</label>
+                            <select id="opcion" class="form-select">
+                                <option value="1">Opción 1</option>
+                                <option value="2">Opción 2</option>
+                                <option value="3">Opción 3</option>
+                            </select>
+                            </div>
+                        </form>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+  
+        </div>
+    </div>
+</div>
+
+       
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'menu.html' %} {% block contenido %}
+
+
+<form method="post" class="container" novalidate>{% csrf_token %}
+    
+    ¿Estas seguro que quieres eliminar "" de los motivos?
+    {{form.as_p}}
+    <button class="btn btn-outline-secondary" type="submit">Eliminar</button>
+    <a class="btn btn-outline-secondary" href="{% url 'transferencias:motivos' %}">Cancelar</a>
+</form>
+
+{% endblock %}

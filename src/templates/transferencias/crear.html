@@ -1,0 +1,23 @@
+{% extends 'menu.html' %} {% block contenido %}
+
+
+
+<h1>TRANSFERIR</h1>
+
+<div class="center">
+	<form method="post" class="card" novalidate>
+	  	{% csrf_token %}
+	    <h2 class="text-center">Log in to your account</h2>
+		{% for field in form %}
+	    		{{ field.label_tag }} 
+	        	{{ field }}
+	        	{% if field.errors %}
+	        		<small>{{ field.errors|striptags }}</small> 
+	        	{% endif %}
+		{% endfor %}
+		
+		<input type="submit"  class="btn btn-primary full-width">
+		<hr>
+	</form>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'menu.html' %} {% block contenido %}
+
+<h1>LISTADO USUARIO</h1>
+<table>
+    <tr>
+      <h1>usuarios</h1>
+    </tr>
+    {% for us in usuarios%}
+    <tr>
+      <td>{{us.username}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+
+  {% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'menu.html' %} {% block contenido %}
+
+<div class="row">
+  <!-- Formulario de búsqueda -->
+  <form method="get" action="{% url 'usuarios:listado' %}" class="col-4">
+        
+      <div class="input-group mb-3 col-6">
+        <span class="input-group-text">Buscar por cvu</span>  
+        <input type="text" name="q" placeholder="Buscar..." value="{{ request.GET.q }}" class="form-control">
+        <button type="submit" class="btn btn-outline-secondary input-group-text">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+          </svg>
+        </button>
+      </div>
+  </form>
+</div>
+  <!-- Tabla resultados -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">CVU</th>
+        <th scope="col">usuario</th>
+        <th scope="col">DNI</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Saldo</th>
+        <th scope="col">Estado</th>
+
+      </tr>
+    </thead>
+    <tbody>
+        {% for us in usuarios%}
+            
+              <tr>
+                  <td>{{us.cvu}}</td>
+                  <td>{{us.username}}</td>
+                  <td>{{us.dni}}</td>
+                  <td>{{us.first_name}}</td>
+                  <td>{{us.first_name}}</td>
+                  <td>{{us.saldo}}</td>
+                  {% if us.is_active %}
+                  <td>activo</td>
+                  {% else %}
+                  <td>inactivo</td>
+                  {% endif %}
+                  <td><a class="nav-link" href="{% url 'usuarios:perfil' us.cvu %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                      <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                      <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                    </svg>
+                  </a></td>
+              </tr>
+        {% endfor %}
+    </tbody>
+        
+  </table>
+
+      
+
+
+  {% endblock %}
