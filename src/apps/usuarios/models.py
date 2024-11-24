@@ -11,7 +11,7 @@ class Usuario(AbstractUser):
       # Asegurar unicidad en la base de datos
     # campo para saber si es administrador, por defecto no lo es
     is_admin = models.BooleanField(default=False)
-    foto_perfil = models.ImageField(default="default.png",upload_to='fotos_perfil/', blank=True, null=False)
+    foto_perfil = models.ImageField(default="default.png",upload_to='fotos_perfil/', null=False)
     date_joined = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 

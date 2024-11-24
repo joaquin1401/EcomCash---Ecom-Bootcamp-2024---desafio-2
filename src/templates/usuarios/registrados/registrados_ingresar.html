@@ -1,0 +1,61 @@
+{% extends 'base.html' %} {% block content_gral %}
+
+<div class="">
+    <div class="card" style="width: 30rem;">
+{% comment %} card-HEADER {% endcomment %}
+        <div class="card-header" style="background: #F2F2F2;">
+            <a class="col nav-link"href="{% url 'usuarios:registrados_inicio' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>                
+            </a>
+            
+        </div>
+{% comment %} card-BODY {% endcomment %}
+
+        <div class="card-body ">
+            <h3>Ingresar dinero</h3>
+            <h5>Para ingresar dinero debes transferir al siguiente cvu desde cualquier cuenta</h5>
+            <p>Desza, Joaquin Ignacio - PersonalPay <br>
+                CUIL: 20-43146409-9
+            </p>
+
+            <div class="row">
+                <fieldset disabled class="col-7">
+                    <input class="form-control" type="text" id="texto" value="0000076500000014060371" readonly>
+                </fieldset>
+                <button id="copiar-btn" class="nav-link col-1" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+                    </svg>
+                </button>
+            </div>
+            <script>
+                // Seleccionar el botón y el campo de texto
+                const boton = document.getElementById('copiar-btn');
+                const texto = document.getElementById('texto');
+        
+                // Agregar evento al botón
+                boton.addEventListener('click', () => {
+                    // Seleccionar el texto
+                    texto.select();
+                    texto.setSelectionRange(0, 99999); // Para dispositivos móviles
+        
+                    // Copiar al portapapeles
+                    navigator.clipboard.writeText(texto.value)
+                        .then(() => {
+                            alert('¡Texto copiado al portapapeles!');
+                        })
+                        .catch(err => {
+                            console.error('Error al copiar:', err);
+                        });
+                });
+            </script>
+
+        </div>
+{% comment %} card-FOOTER {% endcomment %}
+    </div>
+</div>
+
+       
+{% endblock %}

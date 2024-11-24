@@ -1,13 +1,54 @@
 {% extends 'menu.html' %} {% block contenido %}
 
+{% comment %} 
+<div class="container mt-4">
+    <h2>Cambiar Estado de Usuario</h2>
+    
+    
+    <p>El usuario está actualmente: <strong>{{ usuario.is_active|yesno:"Activo,Inactivo" }}</strong></p> 
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">
+            Cambiar Estado
+        </button>
+        <a class="btn btn-secondary" href="{% url 'usuarios:perfil' usuario.cvu %}">Cancelar</a>
+    </form>
+</div>
+
+
+
+
+
+# admin > CAMBIAR ESTADO
+class CambiarEstado(UpdateView):
+    model = Usuario
+    template_name = "usuarios/admin/cambiar_estado.html"
+    # atributos que quiero modificar
+    fields = ["is_active"]
+    def get_success_url(self):
+        # Generar la URL dinámica en tiempo de ejecución
+        return reverse_lazy('usuarios:listado')
+{% endcomment %}
+
+
+
+
+
 
 <form method="post" class="container" novalidate>{% csrf_token %}
     
-    {{form.is_active.value}}
-    {{form.is_active}}
-    ¿Estas seguro que quieres eliminar "{{ usuario.is_active }}" de los motivos?
+
+    el usuario {{usuario}}
+    esta actualmente
+    {% if usuario.is_active %}
+        ACTIVO
+    {% else %}
+        INACTIVO
+    {% endif %}
+
+
     <button class="btn btn-outline-secondary" type="submit">Cambiar</button>
     <a class="btn btn-outline-secondary" href="{% url 'usuarios:perfil' usuario.cvu %}">Cancelar</a>
-</form>
+</form> 
 
 {% endblock %}

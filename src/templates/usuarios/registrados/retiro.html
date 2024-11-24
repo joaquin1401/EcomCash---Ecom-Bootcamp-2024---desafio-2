@@ -16,16 +16,20 @@
             <div class="center">
                 <form method="post">
                     {% csrf_token %}
+                        
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">{{ form.monto.label }}</span>
+                            {{form.monto}}
+                            <div class="form-text">{{form.monto.errors}}</div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">{{ form.motivo.label }}</span>
+                            {{form.motivo}}
+                            <div class="form-text">{{form.motivo.errors}}</div>
+                        </div>
+                        {{forms.error}}
 
-                        {% for elemento in form %}
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">{{ elemento.label }}</span>
-                                {{elemento}}
-                                <div class="form-text">{{elemento.errors}}</div>
-                            </div>
-                            
-                        {% endfor %}
-                        <button type="submit" class="btn btn-primary rounded-pill" style="background: #A62D59;">Transferir</button>
+                        <button type="submit" class="btn btn-primary rounded-pill" style="background: #A62D59;">Retirar</button>
                 </form>
                 
 

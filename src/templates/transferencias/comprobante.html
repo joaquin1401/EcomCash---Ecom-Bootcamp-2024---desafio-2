@@ -22,7 +22,15 @@
 {% comment %} card-FOOTER {% endcomment %}
         <div class="card-footer text-body-secondary">
             <div class="container text-center">
-                
+                {% if user.is_admin %}
+                    <a class="col nav-link"href="{% url 'usuarios:listado' %}">
+                        Volver             
+                    </a>
+                {% else %}
+                    <a class="col nav-link"href="{% url 'usuarios:registrados_movimientos' %}">
+                        Volver             
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>

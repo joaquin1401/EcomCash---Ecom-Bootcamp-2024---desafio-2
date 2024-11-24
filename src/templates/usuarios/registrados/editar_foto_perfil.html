@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block content_gral %}
+
+<div class="">
+    <div class="card" style="width: 30rem;">
+{% comment %} card-HEADER {% endcomment %}
+        <div class="card-header text-center" style="background: #F2F2F2;">
+            <h4>Editar foto de perfil</h4>
+            
+        </div>
+{% comment %} card-BODY {% endcomment %}
+
+        <div class="card-body position-relative">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary rounded-pill" style="background: #A62D59;">Guardar cambios</button>
+
+                
+            </form>
+
+        </div>
+{% comment %} card-FOOTER {% endcomment %}
+        <div class="card-footer text-body-secondary" style="background: #F2F2F2;">
+            <a href="{% url 'usuarios:registrados_perfil' %}" class="nav-link">Volver</a>
+        </div>
+    </div>
+</div>
+
+       
+{% endblock %}
+
+
+
+
+
+
+
+

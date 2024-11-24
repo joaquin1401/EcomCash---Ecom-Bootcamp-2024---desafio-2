@@ -3,7 +3,7 @@
 <div class="">
     <div class="card" style="width: 30rem;">
 {% comment %} card-HEADER {% endcomment %}
-        <div class="card-header">
+        <div class="card-header" style="background: #F2F2F2;">
             <a class="col nav-link"href="{% url 'usuarios:registrados_perfil' %}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
@@ -25,11 +25,8 @@
                     </div>
                     
                 {% endfor %}
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Default file input example</label>
-                    <input class="form-control" type="file" id="formFile">
-                  </div>
-                <button type="submit" class="btn btn-outline-secondary">Guardar cambios</button>
+                <button type="submit" class="btn btn-primary rounded-pill" style="background: #A62D59;">Guardar cambios</button>
+
             </form>
 
         </div>

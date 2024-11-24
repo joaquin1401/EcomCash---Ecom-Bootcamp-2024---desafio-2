@@ -30,16 +30,27 @@ class CrearFormUsuario(forms.ModelForm):
 
 class FormTransferencia(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(FormTransferencia, self).__init__(*args, **kwargs)
-        self.fields['monto'].widget.attrs = {
-            'required': True,
-            'placeholder': 'Ejemplo de placeholder',
-            'type':'text'
-        }
+        super().__init__(*args, **kwargs)
+        for campo in self.fields.values():
+            clase_existente = campo.widget.attrs.get('class', '')
+            campo.widget.attrs['class'] = f'{clase_existente} form-control'.strip()
     class Meta:
         model = Transferencia
         # solo muestra estos dos campos
         fields = ["monto", "cvu_destino", "motivo"]
+
+
+class FormRetiro(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for campo in self.fields.values():
+            clase_existente = campo.widget.attrs.get('class', '')
+            campo.widget.attrs['class'] = f'{clase_existente} form-control'.strip()
+    class Meta:
+        model = Transferencia
+        # solo muestra estos dos campos
+        fields = ["monto",  "motivo"]
+
 
 class FormIngreso(forms.ModelForm):
     class Meta:
@@ -52,3 +63,29 @@ class FormIngreso(forms.ModelForm):
         for campo in self.fields.values():
             clase_existente = campo.widget.attrs.get('class', '')
             campo.widget.attrs['class'] = f'{clase_existente} form-control'.strip()
+
+
+
+class FormUsuarioRegistradoEditar(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        # solo muestra estos dos campos
+        fields = ["dni", "cuil","first_name", "last_name", "email", "password"]
+    # asigna a todos ditectamete la clase >>>>
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for campo in self.fields.values():
+            clase_existente = campo.widget.attrs.get('class', '')
+            campo.widget.attrs['class'] = f'{clase_existente} form-control'.strip()
+
+
+
+
+# usuario registrado > EDITAR foto perfil
+class FotoPerfilForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['foto_perfil']
+        widgets = {
+            'foto_perfil': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }
