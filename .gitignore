@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Entornos virtuales
+venv/
+env/
+
+# Archivos de configuración
+*.env
+
+
+# Archivos de logs
+*.log
+
+# Archivos de compilación
+*.pyc
+.DS_Store
+
+# Configuración de sistemas operativos
+Thumbs.db
+
+# Archivos json
+.json
+
+# node_modules
+.node_modules
