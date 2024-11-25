@@ -31,13 +31,13 @@
     </thead>
     <tbody>
         {% for us in usuarios%}
-            
+            {% if not us.is_admin %}
               <tr>
                   <td>{{us.cvu}}</td>
                   <td>{{us.username}}</td>
                   <td>{{us.dni}}</td>
                   <td>{{us.first_name}}</td>
-                  <td>{{us.first_name}}</td>
+                  <td>{{us.last_name}}</td>
                   <td>{{us.saldo}}</td>
                   {% if us.is_active %}
                   <td>activo</td>
@@ -51,6 +51,7 @@
                     </svg>
                   </a></td>
               </tr>
+              {% endif %}
         {% endfor %}
     </tbody>
         

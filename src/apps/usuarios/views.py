@@ -260,20 +260,20 @@ class CambiarEstadoUsuarioView(LoginRequiredMixin, UpdateView):
     fields = ["is_active"]  # No necesitas incluir ningún campo del formulario
     template_name = "usuarios/admin/cambiar_estado.html"
 
-    def form_valid(self, form):
-        usuario = form.instance
-        if usuario.is_active:
-            print(usuario.is_active)
-            usuario.is_active = False
-            print(usuario.is_active)
-        else:
-            print(usuario.is_active)
-            usuario.is_active = True
-            print(usuario.is_active)
+    #def form_valid(self, form):
+#        usuario = form.instance
+#        if usuario.is_active:
+ #           print(usuario.is_active)
+  #          usuario.is_active = False
+   #         print(usuario.is_active)
+    #    else:
+     #       print(usuario.is_active)
+      #      usuario.is_active = True
+       #     print(usuario.is_active)
         # Cambio el estado directamente en el objeto
         # Guarda el cambio
-        usuario.save()
-        return super().form_valid(form)
+      #  usuario.save()
+       # return super().form_valid(form)
         # obtengo el cvu del usuario a cambiar
         #cvu_usuario = form.instance.cvu
         #estado_actual = Usuario.objects.filter(cvu=cvu_usuario)[0].is_active
@@ -401,6 +401,14 @@ class UsuarioCreateView(CreateView):
     template_name = "usuarios/crear.html"
     form_class = CrearFormUsuario
     success_url = reverse_lazy("login")
+    def form_valid(self, form):
+        # Guarda el usuario sin confirmar
+        user = form.save(commit=False)
+        # Configura la contraseña correctamente
+        user.is_active = True
+        user.set_password(form.cleaned_data['password'])
+        user.save()
+        return super().form_valid(form)
 
 
 # LOGIN
